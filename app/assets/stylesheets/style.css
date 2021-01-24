@@ -1,0 +1,27 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header{
+  width: 100%;
+}
+
+.logo{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.copyright{
+  height: 110px;
+}
+
+.copyright p{
+  line-height: 110px;
+}
+
+.icon{
+  margin: 0 auto;
+}
+
