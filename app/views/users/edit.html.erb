@@ -1,0 +1,26 @@
+<% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar.variant(resize_to_fill: [200, 200]), class: "rounded-circle" %>
+<% else %>
+  <%= image_tag 'no_image.jpg', size: "200x200", class: "rounded-circle" %>
+<% end %>
+
+<%= form_with model: @user, local: true do |f| %>
+
+  <div class="">
+    <label for="image">Profile image</label><br>
+    <%= f.file_field :avatar, id:"image" %>
+  </div>
+
+  <div class="">
+    <label for="name">Name</label><br>
+    <%= f.text_field :name, autofocus: true, id:"name" %>
+  </div>
+
+  <div class="">
+    <label for="mail">e-Mail</label><br>
+    <%= f.text_field :email, autofocus: true, id:"mail" %>
+    </div>
+
+  <%= f.submit "Update User", class: "btn btn-secondary" %>
+
+<% end %>

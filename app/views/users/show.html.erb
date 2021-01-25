@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% if @user.avatar.attached? %>
+        <%= image_tag @user.avatar.variant(resize_to_fill: [200, 200]), class: "rounded-circle" %>
+      <% else %>
+        <%= image_tag 'no_image.jpg', size: "200x200", class: "rounded-circle" %>
+      <% end %>
+    </div>
+    <div class="col">
+      <div class="row">
+        <h1><%= @user.name %></h1>
+      </div>
+      <div class="row">
+        <h2>フォロー</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<%= link_to "Profile Edit", edit_user_path(@user.id) %>
+<%= link_to "LogOut", destroy_user_session_path, method: :delete %>
+<%= @user.name %>
