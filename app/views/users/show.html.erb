@@ -1,33 +1,60 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
+  <div class="row mb-3 pb-5 border-bottom border-dark">
+    <div class="col-md-2 col-sm-12">
       <% if @user.avatar.attached? %>
         <%= image_tag @user.avatar.variant(resize_to_fill: [200, 200]), class: "rounded-circle" %>
       <% else %>
-        <%= image_tag 'no_image.jpg', size: "200x200", class: "rounded-circle" %>
+        <%= image_tag 'no_image.png', size: "200x200", class: "rounded-circle" %>
       <% end %>
     </div>
-    <div class="col">
-      <div class="row">
+    <div class="col-md-6 col-sm-12 p-5">
+      <div class="">
         <h1><%= @user.name %></h1>
-      </div>
-      <div class="row">
-        <h2>フォロー</h2>
+        <h3>following 0</h3>
+        <% if current_user == @user %>
+          <%= link_to "Edit Profile", edit_user_path(@user.id) %>
+        <% else %>
+          <%= link_to "フォローする", edit_user_path(@user.id), class:"btn btn-outline-info btn-sm"%>
+        <% end %>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col">
+  <% if current_user == @user %>
+    <h2 class="text-center">Reports</h2>
+    <% if @reports.count == 0 %>
+      <h3 class="text-center my-4">通報はありません</h3>
+    <% else %>
+      <% @reports.each do |report| %>
+        <div class="shadow m-4 p-3 border border-dark rounded text-center">
+          <h3>通報理由： <%= report.title %></h3>
+          <h5><%= report.body %></h5>
+          <%= link_to "反省する", report_path(report), method: :delete, class:"btn btn-outline-danger btn-sm btn-block mt-4 col-6 mx-auto" %>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="text-center">
+      <h2>Report Form</h2>
+      <%= form_with model: @report, local:true do |f| %>
+        <div class="my-3">
+          <label for="title">通報理由</label><br>
+          <%= f.text_field :title, id:"title" %>
+        </div>
+        <div class="my-3">
+          <label for="body">詳細内容</label><br>
+          <%= f.text_area :body, id:"body" %>
+        </div>
+        <div class="mx-auto mt-5 col-6">
+        <%= f.text_field :reportee_id, value: @user.id, class: "d-none"%>
+        <%= f.submit '通報', class:"btn btn-danger btn-lg btn-block" %>
+        </div>
+      <% end %>
     </div>
-    <div class="col">
-    </div>
-  </div>
+  <% end %>
 </div>
 
 
 
 
-
-<%= link_to "Profile Edit", edit_user_path(@user.id) %>
 <%= link_to "LogOut", destroy_user_session_path, method: :delete %>
 <%= @user.name %>
