@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
     report = Report.new(report_params)
     report.user_id = current_user.id
     report.save
+    UserMailer.report_email(report).deliver
     redirect_to user_path(current_user.id)
   end
 
