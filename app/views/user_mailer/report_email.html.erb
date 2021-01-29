@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <p><%= @user.name %>様</p>
+
+    <h3>貴方は通報されました!</h3>
+
+    <p>今すぐYHBRにログインして反省しましょう!</p>
+
+    <h3>通報理由： <%= @report.title %></h3>
+
+    </div>
+  </body>
+</html>
