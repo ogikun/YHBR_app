@@ -10,11 +10,15 @@
     <div class="col-md-6 col-sm-12 p-5">
       <div class="">
         <h1><%= @user.name %></h1>
-        <h3>following 0</h3>
+        <h3>Following <%= @user.follower.count %> / Follower <%= @user.followed.count %></h3>
         <% if current_user == @user %>
           <%= link_to "Edit Profile", edit_user_path(@user.id) %>
         <% else %>
-          <%= link_to "フォローする", edit_user_path(@user.id), class:"btn btn-outline-info btn-sm"%>
+          <% if current_user.following?(@user) %>
+            <%= link_to " フォロー中 ", unfollow_path(@user.id), method: :POST, class: "btn btn-info btn-sm" %>
+          <% else %>
+            <%= link_to "フォローする", follow_path(@user.id), method: :POST, class: "btn btn-outline-info btn-sm" %>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -26,9 +30,10 @@
     <% else %>
       <% @reports.each do |report| %>
         <div class="shadow m-4 p-3 border border-dark rounded text-center">
-          <h3>通報理由： <%= report.title %></h3>
+          <h4>通報理由:</h4>
+          <h3><%= report.title %></h3>
           <h5><%= report.body %></h5>
-          <%= link_to "反省する", report_path(report), method: :delete, class:"btn btn-outline-danger btn-sm btn-block mt-4 col-6 mx-auto" %>
+          <%= link_to "反省しました", report_path(report), method: :delete, class:"btn btn-outline-danger btn-sm btn-block mt-4 col-6 mx-auto" %>
         </div>
       <% end %>
     <% end %>
