@@ -1,2 +1,7 @@
-var title = "javascriptが使えました";
-alert(title);
+$(function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
+  });
+});

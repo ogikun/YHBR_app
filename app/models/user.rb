@@ -14,6 +14,23 @@ class User < ApplicationRecord
   has_many :following_user, through: :follower, source: :followed
   has_many :follower_user, through: :followed, source: :follower
 
+  validates :name, presence: true, uniqueness: true
+
+  validate :validate_avatar
+
+  def validate_avatar
+    return unless avatar.attached?
+    if avatar.blob.byte_size > 5.megabytes
+      avatar.purge
+    elsif !image?
+      avatar.purge
+    end
+  end
+
+  def image?
+    %w[image/jpg image/jpeg image/gif image/png].include?(avatar.blob.content_type)
+  end
+
   def follow(user_id)
     follower.create(followed_id: user_id)
   end

@@ -1,0 +1,27 @@
+
+  <div class="border row p-2 shadow m-4 p-3 border border-dark rounded text-center">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <%= link_to user_path(user.id) do %>
+        <% if user.avatar.attached? %>
+          <%= image_tag user.avatar.variant(resize_to_fill: [50, 50]), class: "rounded-circle" %>
+        <% else %>
+          <%= image_tag 'no_image.png', size: "50x50", class: "rounded-circle" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-4 my-auto">
+      <%= link_to user_path(user.id), class: "text-dark" do %>
+        <%= user.name %>
+      <% end %>
+    </div>
+    <div class="col-md-3 my-auto">
+      <% if current_user != user %>
+        <% if current_user.following?(user) %>
+          <%= link_to " フォロー中 ", unfollow_path(user.id), method: :POST, class: "btn btn-info btn-sm" %>
+        <% else %>
+          <%= link_to "フォローする", follow_path(user.id), method: :POST, class: "btn btn-outline-info btn-sm" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>

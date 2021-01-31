@@ -1,14 +1,22 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto text-center">
-      <h1 class="mb-5 heading">YOU HAVE BEEN REPORTED!!</h1>
-      <p class="mb-5">
-        このサービスはSNS等に実装されている「通報」という機能を現実世界に実装するサービスです。<br>
-        もしあなたが無礼を働かれたなら、このサービスを利用して匿名で相手を通報しましょう。<br>
+      <h1 class="mb-5 heading text-center">YOU HAVE BEEN REPORTED!!</h1>
+      <p class="mb-5 px-3">
+        このWEBアプリは、よくネットサービスなどにみられる「通報」という機能を現実世界に実装するサービスです。<br>
+        <br>
+        もしあなたが無礼を働かれたなら、このアプリを利用して匿名で相手を通報しましょう。<br>
+        <br>
         もしあなたが無礼を働いたのなら、届いた通報を真摯に受け止めて反省しましょう。<br>
       </p>
-      <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-info btn-lg" %>
-      <%= link_to "サインイン", new_user_session_path, class: "btn btn-success btn-lg" %>
+      <div class="text-center">
+        <% if !user_signed_in? %>
+          <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-info btn-lg" %>
+          <%= link_to "サインイン", new_user_session_path, class: "btn btn-success btn-lg" %>
+        <% else %>
+          <%= link_to "マイページ", user_path(current_user.id), class: "btn btn-info btn-lg" %>
+      <% end %>
+      </div>
     </div>
   </div>
 </div>

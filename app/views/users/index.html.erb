@@ -1,3 +1,13 @@
-<h2>Search User</h2>
-  <input>
-<h2>Your Following</h2>
+<div class="container">
+  <div class="text-center">
+    <h2>Search User</h2>
+    <p>ユーザー名で知り合いを検索しましょう</p>
+    <%= form_with url:users_path, method: :get, local: true do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit :Search %>
+    <% end %>
+  </div>
+  <% @users.each do |user| %>
+    <%= render "layouts/user_list", user: user%>
+  <% end %>
+</div>

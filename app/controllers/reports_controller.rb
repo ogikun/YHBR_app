@@ -5,13 +5,21 @@ class ReportsController < ApplicationController
     report.user_id = current_user.id
     report.save
     UserMailer.report_email(report).deliver
-    redirect_to user_path(current_user.id)
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
     report = Report.find(params[:id])
+    if params[:message].present?
+      message = params[:message]
+    else
+      massage = "なし"
+    end
     report.destroy
-    redirect_to user_path(current_user.id)
+    if current_user.id != report.user_id
+      UserMailer.reflection_email(report, message).deliver
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   private

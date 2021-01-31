@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @user.name %>様</p>
+    <h3><%= @reportee.name %>様が下記の通報によって反省しました！</h3>
+    <h4>通報理由： <%= @report.title %></h4>
+    <p>通報内容：<%= @report.body %></p>
+    <br>
+    <p>相手からのメッセージ：<%= @message %></p>
+  </body>
+</html>

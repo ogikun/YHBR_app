@@ -4,6 +4,8 @@
     <title>Yhbr</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="apple-touch-icon" href="app/assets/images/icon.png">
+    <link rel="android-touch-icon" href="app/assets/images/icon.png">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,15 +16,34 @@
     <header>
       <nav class="nav-bar bg-danger mb-5">
         <div class="container">
-            <%= link_to "/" do %>
+            <%= link_to root_path do %>
               <%= image_tag('logo.png') %>
             <% end %>
         </div>
       </nav>
     </header>
+    <% if user_signed_in? %>
+      <div id="sp-menu">
+        <h2 class="text-center border-bottom border-light">MENU</h2>
+        <ul>
+          <li><%= link_to "MyPage", user_path(current_user.id) %></li>
+          <li><%= link_to "Search", users_path %></li>
+          <li><%= link_to "Following", following_path(current_user.id) %></li>
+          <li><%= link_to "Follower", follower_path(current_user.id) %></li>
+          <li><%= link_to "EditProfile", edit_user_registration_path(current_user.id) %></li>
+          <li><%= link_to "LogOut", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+      <div id="hm-icon">
+        <a class="menu-trigger" href="#">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+      </div>
+    <% end %>
 
     <%= yield %>
-
     <footer>
       <div class="bg-danger mt-5 copyright">
         <div class="text-center text-white">
@@ -30,5 +51,6 @@
         </div>
       </div>
     </footer>
+    <%= javascript_pack_tag 'menu.js' %>
   </body>
 </html>

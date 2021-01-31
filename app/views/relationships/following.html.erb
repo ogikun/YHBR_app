@@ -1,0 +1,10 @@
+<div class="container">
+  <h2 class="text-center">Following</h2>
+  <% if @user.following_user.count > 0 %>
+    <% @user.following_user.each do |user| %>
+      <%= render "layouts/user_list", user: user%>
+    <% end %>
+  <% else %>
+    <h4 class="text-center my-4 text-secondary">誰もフォローしていません</h4>
+  <% end %>
+</div>
