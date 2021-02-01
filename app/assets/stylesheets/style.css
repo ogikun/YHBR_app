@@ -96,6 +96,10 @@ header{
   z-index: 19;
 }
 
+#reflection-window{
+  z-index: 20;
+}
+
 .copyright{
   height: 110px;
 }
