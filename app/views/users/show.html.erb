@@ -18,7 +18,7 @@
             <h4>通報理由:</h4>
             <h3><%= report.title %></h3>
             <h5><%= report.body %></h5>
-            <h5 class="mt-5 pt-5 border-top border-dark">Massage</h5>
+            <h5 class="mt-5 pt-5 border-top border-dark">Message</h5>
             <%= form_with url:report_path(report), method: :delete, local: true do |f| %>
               <%= f.text_field :message, class: "col-12" %>
               <%= f.submit :反省しました, class:"btn btn-success btn-sm mt-4 mx-auto col-7"%>
@@ -58,4 +58,5 @@
     </div>
   <% end %>
 </div>
+
 <%= javascript_pack_tag 'report.js'%>
