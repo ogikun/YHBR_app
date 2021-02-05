@@ -104,6 +104,10 @@ header{
   min-height: 100%;
 }
 
+#reflection-window{
+  z-index: ;
+}
+
 .copyright{
   height: 110px;
 }

@@ -11,19 +11,19 @@
           <h3><%= report.title %></h3>
           <h5><%= report.body %></h5>
           <a href="#" class="btn btn-outline-danger btn-sm btn-block mt-4 col-6 mx-auto reflection">反省する</a>
-        </div>
-        <div id="reflection-back" class="p-5 ">
-          <div id="reflection-switch" class="reflection"></div>
-          <div id="reflection-window" class="shadow mx-auto p-5 my-5 border border-dark rounded text-center text-dark bg-white col-md-8" >
-            <h4>通報理由:</h4>
-            <h3><%= report.title %></h3>
-            <h5><%= report.body %></h5>
-            <h5 class="mt-5 pt-5 border-top border-dark">Message</h5>
-            <%= form_with url:report_path(report), method: :delete, local: true do |f| %>
-              <%= f.text_field :message, class: "col-12" %>
-              <%= f.submit :反省しました, class:"btn btn-success btn-sm mt-4 mx-auto col-7"%>
-            <% end %>
-          </div>
+          <div id="reflection-back" class="p-5">
+              <div id="reflection-switch" class="reflection"></div>
+              <div id="reflection-window" class="shadow mx-auto p-5 my-5 border border-dark rounded text-center text-dark bg-white col-md-8" >
+                <h4>通報理由:</h4>
+                <h3><%= report.title %></h3>
+                <h5><%= report.body %></h5>
+                <h5 class="mt-5 pt-5 border-top border-dark">Message</h5>
+                <%= form_with url:report_path(report), method: :delete, local: true do |f| %>
+                  <%= f.text_field :message, class: "col-12" %>
+                  <%= f.submit :反省しました, class:"btn btn-success btn-sm mt-4 mx-auto col-7"%>
+                <% end %>
+              </div>
+            </div>
         </div>
       <% end %>
     <% end %>
